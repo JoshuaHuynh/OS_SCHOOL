@@ -332,8 +332,8 @@ int main(int argc, char** argv)
 
                            par_check++;
                         }
-                        else
-                        {
+                        else{
+
                             sum = sum + pow(2,po);
                             par_check++;
                         }
@@ -343,8 +343,8 @@ int main(int argc, char** argv)
                 }
 
                 asc[numc] = sum;
-                if(isascii(sum) != 1)
-                {
+                if(isascii(sum) != 1){
+
                     printf("Error. Please input ASCII values only.\n");
                     return 0;
                 }
@@ -357,19 +357,9 @@ int main(int argc, char** argv)
                 x = 0;
                 numc++;
                 strcpy(asc_beg,"");
-                //z++;
-            }
-            /*
-            while(z < sizeof(argv[numc])) // iterate through number set in order to find decimal
-            {
-                if(argv[numc][z] == '1')
-                    sum = sum + pow(2,po);
-
-                z++;
 
             }
 
-            */
             printf("Original    ASCII       Decimal   Parity\n");
             printf("--------    --------    --------  --------\n");
             char even[5] = "EVEN";
@@ -378,28 +368,28 @@ int main(int argc, char** argv)
             numc = 1;
             int remain = 0;
 
-            while(numc < argc) //Iterate through the binary numbers
-            {
+            while(numc < argc){ //Iterate through the binary numbers
+
                 printf("%s",argv[numc]); //Print the binary number set
 
                 if(strlen(argv[numc]) < 8) // Calculates how much digits are missing from the 8 digit set
                     remain = 8 - strlen(argv[numc]);
 
-                while(x < remain) //Pad with zeros if binary number set is less than 8 digits
-                {
+                while(x < remain){ //Pad with zeros if binary number set is less than 8 digits
+
                     printf("%d",0);
                     x++;
                 }
 
 
-                if(parity[numc] == 0)
-                {
+                if(parity[numc] == 0){
+
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], even);
-                    else
-                    {
-                        if(dec[numc] >= 0 && dec[numc] <= 32)
-                        {
+                    else{
+
+                        if(dec[numc] >= 0 && dec[numc] <= 32){
+
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
                             else if(dec[numc] == 1)
@@ -467,8 +457,8 @@ int main(int argc, char** argv)
                             else if(dec[numc] == 32)
                                 strcpy(asc_beg,"SPACE");
 
-                            else if(isascii(dec[numc]) != 1)
-                            {
+                            else if(isascii(dec[numc]) != 1){
+
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
@@ -476,14 +466,14 @@ int main(int argc, char** argv)
                         printf("        %5s      %4d    %4s",asc_beg, dec[numc], even);
                     }
                 }
-                else if (parity[numc] != 0)
-                {
+                else if (parity[numc] != 0){
+
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], odd);
-                    else
-                    {
-                        if(dec[numc] >= 0 && dec[numc] <= 32)
-                        {
+                    else{
+
+                        if(dec[numc] >= 0 && dec[numc] <= 32){
+
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
                             else if(dec[numc] == 1)
@@ -551,15 +541,15 @@ int main(int argc, char** argv)
                             else if(dec[numc] == 32)
                                 strcpy(asc_beg,"SPACE");
 
-                            else if(isascii(dec[numc]) != 1)
-                            {
+                            else if(isascii(dec[numc]) != 1){
+
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
                         }
                         printf("        %5s      %4d    %4s",asc_beg, dec[numc], odd);
                     }
-                //printf("        %c", asc[numc]);
+
                 }
 
                 printf("\n");
@@ -577,18 +567,17 @@ int main(int argc, char** argv)
 
     ///////////////
 
-    else if(way == 1)
-    {
+    else if(way == 1){
 
         int BUFFER_SIZE = 100;
         int i = 0;
         char bufr[BUFFER_SIZE];
         char bufset[100];
 
-
         int fd = open(argv[1], O_RDONLY);
-        if(fd == -1)
-        {
+
+        if(fd == -1){
+
             printf("Error. Invalid input.\n");
             return 0;
         }
@@ -612,41 +601,42 @@ int main(int argc, char** argv)
         i = 0;
 
 
-        while(n == BUFFER_SIZE) //If file size is bigger than buffer size, read again
-        {
-            while(i <BUFFER_SIZE) //Scan through bufr for spaces
-            {
-                if(!isspace(bufr[i])) // Print set when a space is found
-                {
+        while(n == BUFFER_SIZE){ //If file size is bigger than buffer size, read again
+
+            while(i <BUFFER_SIZE){ //Scan through bufr for spaces
+
+                if(!isspace(bufr[i])){ // Print set when a space is found
+
                     bufset[bit_i] = bufr[i];
                     printf("%c",bufset[bit_i]);
                     bit_i++;
                     i++;
                 }
-                else // When isspace
-                {
-                    if(bit_i < 7)
-                    {
+                else{ // When isspace
+
+                    if(bit_i < 7){
+
                         remain1 = 8 - (bit_i);
 
-                        while(y < remain1) //If binary number is less than 8 digits, pad with zeros.
-                        {
+                        while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
+
                             printf("%c",'0');
                             y++;
                         }
 
                     }
+
                     y = 0;
-                    while(y < bit_i)
-                    {
-                        if(bufset[y] == '1')
-                        {
-                            if(y == 0)
-                            {
+                    while(y < bit_i){
+
+                        if(bufset[y] == '1'){
+
+                            if(y == 0){
+
                                 par_check1++;
                             }
-                            else
-                            {
+                            else{
+
                                 sum1 = sum1 + pow(2,exp);
                                 par_check1++;
                             }
@@ -656,16 +646,17 @@ int main(int argc, char** argv)
                         exp--;
                     }
 
-                    //asc[numc] = sum;
-                    if(isascii(sum1) != 1)
-                    {
+
+                    if(isascii(sum1) != 1){
+
                         printf("Error. Please input ASCII values only.\n");
                         return 0;
                     }
+
                     asc_char = sum1;
 
-                    if(sum1 >= 0 && sum1 <= 32)
-                    {
+                    if(sum1 >= 0 && sum1 <= 32){
+
                         if(sum1 == 0)
                             strcpy(asc_val,"NUL");
                         else if(sum1 == 1)
@@ -734,25 +725,24 @@ int main(int argc, char** argv)
                             strcpy(asc_val,"SPACE");
                     }
 
-                    if((par_check1 % 2) == 0)
-                    {
+                    if((par_check1 % 2) == 0){
+
 
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s", asc_val, sum1, even1);
                         else
                             printf("        %5c      %4d    %4s", asc_char, sum1, even1);
                     }
-                    else
-                    {
+                    else{
+
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
                         else
                             printf("        %5c      %4d    %4s",asc_char , sum1, odd1);
                     }
 
+                    printf("\n");
 
-                    //dec[numc] = sum;
-                    //parity[numc] = par_check % 2;
                     par_check1 = 0;
                     sum1 = 0;
                     exp = 7;
@@ -770,6 +760,7 @@ int main(int argc, char** argv)
         }
 
         ////////////
+        /*
         int a = 0;
         par_check1 = 0;
         sum1 = 0;
@@ -777,66 +768,68 @@ int main(int argc, char** argv)
         y = 0;
         bit_i = 0;
         remain1 = 0;
+        */
         i = 0;
 
-        while(i < n)// If n >0 and < BUFFER_SIZE, then...
-        {
-            a++;
-            //printf("A: %d   N: %d\n", a, n);
-            if(!isspace(bufr[i])) // Scan through bufr for spaces
-            {
+        while(i < n){ // If n >0 and < BUFFER_SIZE, then...
+
+            //a++;
+
+            if(!isspace(bufr[i])){ // Scan through bufr for spaces
+
                 bufset[bit_i] = bufr[i];
                 printf("%c",bufset[bit_i]);
                 bit_i++;
                 i++;
 
             }
-            else
-            {
-                if(bit_i < 7) // If there is less than 8 bits in the binary number...
-                {
-                    remain1 = 8 - (bit_i);
 
-                    while(y < remain1) //If binary number is less than 8 digits, pad with zeros.
-                    {
-                        printf("%c",'0');
-                        y++;
-                    }
-                    printf("pie");
+            else{
 
-                }
+                    if(bit_i < 7){ // If there is less than 8 bits in the binary number...
 
-                y = 0;
-                while(y < bit_i)
-                {
-                    if(bufset[y] == '1')
-                    {
-                        if(y == 0)
-                        {
-                            par_check1++;
+                        remain1 = 8 - (bit_i);
+
+                        while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
+
+                            printf("%c",'0');
+                            y++;
                         }
-                        else
-                        {
-                            sum1 = sum1 + pow(2,exp);
-                            par_check1++;
-                        }
-                        }
+                        printf("pie");
 
-                        y++;
-                        exp--;
                     }
 
-                    //asc[numc] = sum;
-                    if(isascii(sum1) != 1)
-                    {
+                    y = 0;
+                    while(y < bit_i){
+
+                        if(bufset[y] == '1'){
+
+                            if(y == 0){
+
+                                par_check1++;
+                            }
+                            else {
+
+                                sum1 = sum1 + pow(2,exp);
+                                par_check1++;
+                            }
+                        }
+
+                            y++;
+                            exp--;
+                    }
+
+
+                    if(isascii(sum1) != 1){
+
                         printf("Error. Please input ASCII values only.\n");
                         return 0;
                     }
 
                     asc_char = sum1;
 
-                    if(sum1 >= 0 && sum1 <= 32)
-                    {
+                    if(sum1 >= 0 && sum1 <= 32){
+
                         if(sum1 == 0)
                             strcpy(asc_val,"NUL");
                         else if(sum1 == 1)
@@ -905,25 +898,23 @@ int main(int argc, char** argv)
                             strcpy(asc_val,"SPACE");
                     }
 
-                    if((par_check1 % 2) == 0)
-                    {
+                    if((par_check1 % 2) == 0){
 
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s", asc_val, sum1, even1);
                         else
                             printf("        %5c      %4d    %4s", asc_char, sum1, even1);
                     }
-                    else
-                    {
+                    else {
+
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
                         else
                             printf("        %5c      %4d    %4s",asc_char , sum1, odd1);
                     }
+
                     printf("\n");
 
-                    //dec[numc] = sum;
-                    //parity[numc] = par_check % 2;
                     par_check1 = 0;
                     sum1 = 0;
                     exp = 7;
@@ -936,30 +927,29 @@ int main(int argc, char** argv)
 
         //*****************************
 
-        if(bit_i < 7) // If there is less than 8 bits in the binary number...
-        {
+        if(bit_i < 7){ // If there is less than 8 bits in the binary number...
+
             remain1 = 8 - (bit_i);
 
-            while(y < remain1) //If binary number is less than 8 digits, pad with zeros.
-            {
+            while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
+
                 printf("%c",'0');
                 y++;
             }
 
-
         }
 
         y = 0;
-        while(y < bit_i)
-        {
-            if(bufset[y] == '1')
-            {
-                if(y == 0)
-                {
+        while(y < bit_i){
+
+            if(bufset[y] == '1'){
+
+                if(y == 0){
+
                     par_check1++;
                 }
-                else
-                {
+                else{
+
                     sum1 = sum1 + pow(2,exp);
                     par_check1++;
                 }
@@ -970,16 +960,16 @@ int main(int argc, char** argv)
         }
 
                     //asc[numc] = sum;
-        if(isascii(sum1) != 1)
-        {
+        if(isascii(sum1) != 1){
+
             printf("Error. Please input ASCII values only.\n");
             return 0;
         }
 
         asc_char = sum1;
 
-        if(sum1 >= 0 && sum1 <= 32)
-        {
+        if(sum1 >= 0 && sum1 <= 32){
+
             if(sum1 == 0)
                 strcpy(asc_val,"NUL");
             else if(sum1 == 1)
@@ -1048,25 +1038,24 @@ int main(int argc, char** argv)
                 strcpy(asc_val,"SPACE");
         }
 
-        if((par_check1 % 2) == 0)
-        {
+        if((par_check1 % 2) == 0){
+
 
             if(sum1 >= 0 && sum1 <= 32)
                 printf("        %5s      %4d    %4s", asc_val, sum1, even1);
             else
                 printf("        %5c      %4d    %4s", asc_char, sum1, even1);
         }
-        else
-        {
+        else{
+
             if(sum1 >= 0 && sum1 <= 32)
                 printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
             else
                 printf("        %5c      %4d    %4s",asc_char , sum1, odd1);
         }
+
         printf("\n");
 
-                    //dec[numc] = sum;
-                    //parity[numc] = par_check % 2;
         par_check1 = 0;
         sum1 = 0;
         exp = 7;
@@ -1074,7 +1063,7 @@ int main(int argc, char** argv)
         bit_i = 0;
         i++;
 
-        //****************************
+
 
     }
 
