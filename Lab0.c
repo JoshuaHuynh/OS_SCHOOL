@@ -6,16 +6,20 @@
 #include <math.h>
 #include <string.h>
 
+//Descriptions for the functions are on README file.
+int isspace(int c);
+int isascii(int c);
+
 int main(int argc, char** argv)
 {
 
     //
     int numc = 1;
-    int x = 0;
+    unsigned int x = 0;
     int way = 0;
-    char temp[8];
 
-    if(argv[1][0] != '-'){ // If argv starts does not start with -
+
+    if(argv[1][0] != '-'){ // If argv starts does not start with '-'
 
         numc = 1;
         while (numc < argc){ //Iterate through the binary numbers
@@ -23,7 +27,7 @@ int main(int argc, char** argv)
             while(x < strlen(argv[numc])){ //Iterate through the binary number set
 
                 if(argv[numc][x] != '1' && argv[numc][x] != '0') //Check if there is anything that is not one or zero
-                    way = 1;
+                    way = 1; //If a char is neither '1' nor '0', then assign 1 to the variable way.
                 x++;
             }
             x = 0;
@@ -73,7 +77,7 @@ int main(int argc, char** argv)
             int po = 7;
             int sum = 0;
             x = 0;
-            int z  = 0;
+
             while (numc < argc){ //Iterate through the binary numbers
 
                 while(x < strlen(argv[numc])){ // iterate through binary number set and calculate the decimal for that set
@@ -95,7 +99,7 @@ int main(int argc, char** argv)
                 }
 
                 asc[numc] = sum;
-                if(isascii(sum) != 1){
+                if(isascii(sum) != 1){ //If value is not ASCII, then ....
 
                     printf("Error. Please input ASCII values only.\n");
                     return 0;
@@ -117,7 +121,7 @@ int main(int argc, char** argv)
             char odd[4] = "ODD";
             x = 0;
             numc = 2;
-            int remain = 0;
+            unsigned int remain = 0;
 
             while(numc < argc){ //Iterate through the binary numbers
 
@@ -133,13 +137,13 @@ int main(int argc, char** argv)
                 }
 
 
-                if(parity[numc] == 0){
+                if(parity[numc] == 0){ //If parity of the binary number is even
 
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], even);
                     else{
 
-                        if(dec[numc] >= 0 && dec[numc] <= 32){
+                        if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
 
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
@@ -216,13 +220,13 @@ int main(int argc, char** argv)
                         printf("        %5s      %4d    %4s",asc_beg, dec[numc], even);
                     }
                 }
-                else if (parity[numc] != 0){
+                else if (parity[numc] != 0){ //If parity is odd then.....
 
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], odd);
                     else{
 
-                        if(dec[numc] >= 0 && dec[numc] <= 32){
+                        if(dec[numc] >= 0 && dec[numc] <= 32){ // Assigning mnemonics to the decimal values that don't have ASCII characters
 
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
@@ -321,7 +325,7 @@ int main(int argc, char** argv)
             int po = 7;
             int sum = 0;
             x = 0;
-            int z  = 0;
+
             while (numc < argc){ // Iterate through the binary numbers
 
                 while(x < strlen(argv[numc])){ // iterate through binary number set and calculate the decimal for that set
@@ -343,7 +347,7 @@ int main(int argc, char** argv)
                 }
 
                 asc[numc] = sum;
-                if(isascii(sum) != 1){
+                if(isascii(sum) != 1){ //If value is not ASCII, then...
 
                     printf("Error. Please input ASCII values only.\n");
                     return 0;
@@ -356,7 +360,6 @@ int main(int argc, char** argv)
                 po = 7;
                 x = 0;
                 numc++;
-                strcpy(asc_beg,"");
 
             }
 
@@ -366,7 +369,7 @@ int main(int argc, char** argv)
             char odd[4] = "ODD";
             x = 0;
             numc = 1;
-            int remain = 0;
+            unsigned int remain = 0;
 
             while(numc < argc){ //Iterate through the binary numbers
 
@@ -388,7 +391,7 @@ int main(int argc, char** argv)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], even);
                     else{
 
-                        if(dec[numc] >= 0 && dec[numc] <= 32){
+                        if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
 
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
@@ -472,7 +475,7 @@ int main(int argc, char** argv)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], odd);
                     else{
 
-                        if(dec[numc] >= 0 && dec[numc] <= 32){
+                        if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
 
                             if(dec[numc] == 0)
                                 strcpy(asc_beg,"NUL");
@@ -576,7 +579,7 @@ int main(int argc, char** argv)
 
         int fd = open(argv[1], O_RDONLY);
 
-        if(fd == -1){
+        if(fd == -1){ //If file cannot open
 
             printf("Error. Invalid input.\n");
             return 0;
@@ -655,7 +658,7 @@ int main(int argc, char** argv)
 
                     asc_char = sum1;
 
-                    if(sum1 >= 0 && sum1 <= 32){
+                    if(sum1 >= 0 && sum1 <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
 
                         if(sum1 == 0)
                             strcpy(asc_val,"NUL");
@@ -725,7 +728,7 @@ int main(int argc, char** argv)
                             strcpy(asc_val,"SPACE");
                     }
 
-                    if((par_check1 % 2) == 0){
+                    if((par_check1 % 2) == 0){ //If parity is even.
 
 
                         if(sum1 >= 0 && sum1 <= 32)
@@ -733,7 +736,7 @@ int main(int argc, char** argv)
                         else
                             printf("        %5c      %4d    %4s", asc_char, sum1, even1);
                     }
-                    else{
+                    else{ //If parity is odd.
 
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
@@ -755,25 +758,14 @@ int main(int argc, char** argv)
 
             }
 
-
             n = read(fd, bufr, BUFFER_SIZE);
         }
 
         ////////////
-        /*
-        int a = 0;
-        par_check1 = 0;
-        sum1 = 0;
-        exp = 7;
-        y = 0;
-        bit_i = 0;
-        remain1 = 0;
-        */
+
         i = 0;
 
         while(i < n){ // If n >0 and < BUFFER_SIZE, then...
-
-            //a++;
 
             if(!isspace(bufr[i])){ // Scan through bufr for spaces
 
@@ -795,12 +787,12 @@ int main(int argc, char** argv)
                             printf("%c",'0');
                             y++;
                         }
-                        printf("pie");
+
 
                     }
 
                     y = 0;
-                    while(y < bit_i){
+                    while(y < bit_i){ //Loop to find parity and decimal of binary number
 
                         if(bufset[y] == '1'){
 
@@ -820,7 +812,7 @@ int main(int argc, char** argv)
                     }
 
 
-                    if(isascii(sum1) != 1){
+                    if(isascii(sum1) != 1){ //If THE value is not an ASCII.
 
                         printf("Error. Please input ASCII values only.\n");
                         return 0;
@@ -925,145 +917,148 @@ int main(int argc, char** argv)
 
         }
 
-        //*****************************
+        //*****************************The code below is to find the ASCII character, decimal, and parity of the last binary number in the file
 
-        if(bit_i < 7){ // If there is less than 8 bits in the binary number...
+        if(bufr[n - 1] == 32){
 
-            remain1 = 8 - (bit_i);
-
-            while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
-
-                printf("%c",'0');
-                y++;
-            }
-
-        }
-
-        y = 0;
-        while(y < bit_i){
-
-            if(bufset[y] == '1'){
-
-                if(y == 0){
-
-                    par_check1++;
-                }
-                else{
-
-                    sum1 = sum1 + pow(2,exp);
-                    par_check1++;
-                }
-            }
-
-            y++;
-            exp--;
-        }
-
-                    //asc[numc] = sum;
-        if(isascii(sum1) != 1){
-
-            printf("Error. Please input ASCII values only.\n");
-            return 0;
-        }
-
-        asc_char = sum1;
-
-        if(sum1 >= 0 && sum1 <= 32){
-
-            if(sum1 == 0)
-                strcpy(asc_val,"NUL");
-            else if(sum1 == 1)
-                strcpy(asc_val,"SOH");
-            else if(sum1 == 2)
-                strcpy(asc_val,"STX");
-            else if(sum1 == 3)
-                strcpy(asc_val,"ETX");
-            else if(sum1 == 4)
-                strcpy(asc_val,"EOT");
-            else if(sum1 == 5)
-                strcpy(asc_val,"ENQ");
-            else if(sum1 == 6)
-                strcpy(asc_val,"ACK");
-            else if(sum1 == 7)
-                strcpy(asc_val,"BEL");
-            else if(sum1 == 8)
-                strcpy(asc_val,"BS");
-            else if(sum1 == 9)
-                strcpy(asc_val,"HT");
-            else if(sum1 == 10)
-                strcpy(asc_val,"LF");
-            else if(sum1 == 11)
-                strcpy(asc_val,"VT");
-            else if(sum1 == 12)
-                strcpy(asc_val,"FF");
-            else if(sum1 == 13)
-                strcpy(asc_val,"CR");
-            else if(sum1 == 14)
-                strcpy(asc_val,"SO");
-            else if(sum1 == 15)
-                strcpy(asc_val,"SI");
-            else if(sum1 == 16)
-                strcpy(asc_val,"DLE");
-            else if(sum1 == 17)
-                strcpy(asc_val,"DC1");
-            else if(sum1 == 18)
-                strcpy(asc_val,"DC2");
-            else if(sum1 == 19)
-                strcpy(asc_val,"DC3");
-            else if(sum1 == 20)
-                strcpy(asc_val,"DC4");
-            else if(sum1 == 21)
-                strcpy(asc_val,"NAK");
-            else if(sum1 == 22)
-                strcpy(asc_val,"SYN");
-            else if(sum1 == 23)
-                strcpy(asc_val,"ETB");
-            else if(sum1 == 24)
-                strcpy(asc_val,"CAN");
-            else if(sum1 == 25)
-                strcpy(asc_val,"EM");
-            else if(sum1 == 26)
-                strcpy(asc_val,"SUB");
-            else if(sum1 == 27)
-                strcpy(asc_val,"ESC");
-            else if(sum1 == 28)
-                strcpy(asc_val,"FS");
-            else if(sum1 == 29)
-                strcpy(asc_val,"GS");
-            else if(sum1 == 30)
-                strcpy(asc_val,"RS");
-            else if(sum1 == 31)
-                strcpy(asc_val,"US");
-            else if(sum1 == 32)
-                strcpy(asc_val,"SPACE");
-        }
-
-        if((par_check1 % 2) == 0){
-
-
-            if(sum1 >= 0 && sum1 <= 32)
-                printf("        %5s      %4d    %4s", asc_val, sum1, even1);
-            else
-                printf("        %5c      %4d    %4s", asc_char, sum1, even1);
         }
         else{
+            if(bit_i < 7){ // If there is less than 8 bits in the binary number...
 
-            if(sum1 >= 0 && sum1 <= 32)
-                printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
-            else
-                printf("        %5c      %4d    %4s",asc_char , sum1, odd1);
+                remain1 = 8 - (bit_i);
+
+                while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
+
+                    printf("%c",'0');
+                    y++;
+                }
+
+            }
+
+            y = 0;
+            while(y < bit_i){ //This loop is to find the parity and decimal of the binary number
+
+                if(bufset[y] == '1'){
+
+                    if(y == 0){
+
+                        par_check1++;
+                    }
+                    else{
+
+                        sum1 = sum1 + pow(2,exp);
+                        par_check1++;
+                    }
+                }
+
+                y++;
+                exp--;
+            }
+
+            if(isascii(sum1) != 1){
+
+                printf("Error. Please input ASCII values only.\n");
+                return 0;
+            }
+
+            asc_char = sum1;
+
+            if(sum1 >= 0 && sum1 <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
+
+                if(sum1 == 0)
+                    strcpy(asc_val,"NUL");
+                else if(sum1 == 1)
+                    strcpy(asc_val,"SOH");
+                else if(sum1 == 2)
+                    strcpy(asc_val,"STX");
+                else if(sum1 == 3)
+                    strcpy(asc_val,"ETX");
+                else if(sum1 == 4)
+                    strcpy(asc_val,"EOT");
+                else if(sum1 == 5)
+                    strcpy(asc_val,"ENQ");
+                else if(sum1 == 6)
+                    strcpy(asc_val,"ACK");
+                else if(sum1 == 7)
+                    strcpy(asc_val,"BEL");
+                else if(sum1 == 8)
+                    strcpy(asc_val,"BS");
+                else if(sum1 == 9)
+                    strcpy(asc_val,"HT");
+                else if(sum1 == 10)
+                    strcpy(asc_val,"LF");
+                else if(sum1 == 11)
+                    strcpy(asc_val,"VT");
+                else if(sum1 == 12)
+                    strcpy(asc_val,"FF");
+                else if(sum1 == 13)
+                    strcpy(asc_val,"CR");
+                else if(sum1 == 14)
+                    strcpy(asc_val,"SO");
+                else if(sum1 == 15)
+                    strcpy(asc_val,"SI");
+                else if(sum1 == 16)
+                    strcpy(asc_val,"DLE");
+                else if(sum1 == 17)
+                    strcpy(asc_val,"DC1");
+                else if(sum1 == 18)
+                    strcpy(asc_val,"DC2");
+                else if(sum1 == 19)
+                    strcpy(asc_val,"DC3");
+                else if(sum1 == 20)
+                    strcpy(asc_val,"DC4");
+                else if(sum1 == 21)
+                    strcpy(asc_val,"NAK");
+                else if(sum1 == 22)
+                    strcpy(asc_val,"SYN");
+                else if(sum1 == 23)
+                    strcpy(asc_val,"ETB");
+                else if(sum1 == 24)
+                    strcpy(asc_val,"CAN");
+                else if(sum1 == 25)
+                    strcpy(asc_val,"EM");
+                else if(sum1 == 26)
+                    strcpy(asc_val,"SUB");
+                else if(sum1 == 27)
+                    strcpy(asc_val,"ESC");
+                else if(sum1 == 28)
+                    strcpy(asc_val,"FS");
+                else if(sum1 == 29)
+                    strcpy(asc_val,"GS");
+                else if(sum1 == 30)
+                    strcpy(asc_val,"RS");
+                else if(sum1 == 31)
+                    strcpy(asc_val,"US");
+                else if(sum1 == 32)
+                    strcpy(asc_val,"SPACE");
+            }
+
+            if((par_check1 % 2) == 0){
+
+
+                if(sum1 >= 0 && sum1 <= 32)
+                    printf("        %5s      %4d    %4s", asc_val, sum1, even1);
+                else
+                    printf("        %5c      %4d    %4s", asc_char, sum1, even1);
+            }
+            else{
+
+                if(sum1 >= 0 && sum1 <= 32)
+                    printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
+                else
+                    printf("        %5c      %4d    %4s",asc_char , sum1, odd1);
+            }
+
+            printf("\n");
+
+            par_check1 = 0;
+            sum1 = 0;
+            exp = 7;
+            y = 0;
+            bit_i = 0;
+            i++;
+
         }
-
-        printf("\n");
-
-        par_check1 = 0;
-        sum1 = 0;
-        exp = 7;
-        y = 0;
-        bit_i = 0;
-        i++;
-
-
 
     }
 
