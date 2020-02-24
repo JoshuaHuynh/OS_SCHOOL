@@ -15,30 +15,30 @@ Activity Log for Lab 0 by Joshua Huynh:
 	
 	*I used strlen() to find the number of bits or chars for each binary number set. Each binary number is a string of bits. This function would help me find out if there are less than 8 bits in a binary number.
 	
-* Quick details or summary of what I did to write the program for Lab 0. (Order goes from top to bottom.  I worked on the lab generally from February 7,2020 to February 23,2020)
+* Quick details or summary of what I did to write the program for Lab 0. (Order goes from top to bottom.  I worked on the lab generally from February 7,2020 to February 23,2020).
 	
 	*First, in order to deal with the '-' that may appear as the text file's name or the beginning of stdin, I created branches in the program with if-else statements. For example, if the first character read is '-', then
-	 the program will go to that branch that deals with such a situation.
-	 
+	the program will go to that branch that deals with such a situation.
+
 	*Similarly, I created branches in order to deal with the possibilities of the users reading from a file or using stdin. For example, one branch deals with a user reading from a file, while the other branch deals with stdin.
-	
-	*To check for the possibilities of an error, I used a while-loop to find characters that are neither '1' nor '0'
-	
-	* Then for each of the branches that deal with reading from a file or stdin, I print the binary numbers from the text file or stdin, then I calculate the ASCII character, decimal value, and parity for each binary number. 
-	  Then I print what I found in a table-like display.
-	
-	* To find the ASCII character, I simply created a char variable.  Then I assigned the char variable with the integer that represents the ASCII character.
-	
-	* To find the decimal value, I simply find the positions of the '1' characters in the binary number. Each time a '1' character appears, add 2^x to an int variable.  The integer x is the position or place of 
-	  the '1' character in the binary number
-	
-	* To find the parity of each binary number, I create an int variable that equals zero for each binary number. Then for each binary number, I add 1 to the int variable each time a '1' character appears in the binary number.  
-	  Then I find the remainder of the variable after dividing it by 2.  If the result is 0, then the parity is even.  If not, the parity is odd.
-	 
+
+	*To check for the possibilities of an error, I used a while-loop to find characters that are neither '1' nor '0'.
+
+	*Then for each of the branches that deal with reading from a file or stdin, I print the binary numbers from the text file or stdin, then I calculate the ASCII character, decimal value, and parity for each binary number. 
+	Then I print what I found in a table-like display.
+
+	*To find the ASCII character, I simply created a char variable. Then I assigned the char variable with the integer that represents the ASCII character.
+
+	*To find the decimal value, I simply find the positions of the '1' characters in the binary number. Each time a '1' character appears, add 2^x to an int variable.  The integer x is the position or place of the '1' character 
+	in the binary number
+
+	*To find the parity of each binary number, I create an int variable that equals zero for each binary number. Then for each binary number, I add 1 to the int variable each time a '1' character appears in the binary number.  
+	Then I find the remainder of the variable after dividing it by 2.  If the result is 0, then the parity is even.  If not, the parity is odd.
+
 	*Then, I put the code in K&R style, added some comments, and checked for errors.
-	
+
 	*Finally, I polished up the code by making it shorter. I also made a function called getMnemonic(), which takes in a decimal and a char array.  The function then returns the char array with the mnemonic assigned to the array.
-	
+
 	
 	
 
