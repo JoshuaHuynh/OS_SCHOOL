@@ -1,0 +1,20 @@
+Activity Log for Lab 1 by Joshua Huynh:
+
+* Quick details or summary of what I did to write the program for Lab 1. (Order goes from top to bottom.  I worked on the lab generally from February 28,2020 to February 29,2020).
+
+	*I start off by printing the number of seconds since the Epoch (00:00:00 UTC, January 1, 1970). 
+
+	*I did this by printing out the value returned by time(NULL). 5:44 AM
+
+	*Then I created a child process by calling the fork() function. I assigned the values that the fork() function returns to the fork_val variable.
+
+	*Then I found the PID through the fork() function.  If fork() returns a number greater than 0, then use getpid() to find the PPID.  The waitpid() function that appeared right after the fork() function ensures that the 
+	child process finishes before the parent process can continue.
+
+	*I made both the parent and the child process use the same function to report its process information.  The process information includes the PPID,PID, CPID, and RETVAL.
+
+	*The I printed the user time, system time, user time of child, and system time of child.  I printed these times with the times() function.
+
+	*I then repeated the first step in this activity log as the last step.
+
+	*Finally, I added comments, checked for errors, and made the code more readable.
