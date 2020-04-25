@@ -1,0 +1,40 @@
+Activity Log for Lab 2 by Joshua Huynh:
+
+* Quick details or summary of what I did to write the programS for Lab 2. (March 13,2020 to March 15,2020. April 23,2020 to April 24,2020)
+
+	*Launch program
+
+		*I created one child process by using the fork() function.  I assigned the value that the fork() 
+		function returns to the fork_val variable.  
+
+		*Then on the parent process, I print out the child process ID through stderr by using fprintf.
+
+		*On the child process, I prepared the new argv structure through a function.  Then I executed the supplied command. 
+
+		*Then, back on the parent process, I used the waitpid() function to get the return value of the child.  I then printed the return value through stderr.
+		
+		*I then added comments and checked for errors.
+
+	*Tube program
+
+		*I find the index of where the comma is located in argv through the find_comma() function that I created.
+
+		*I created two arrays that holds strings.  I filled up one array with the first half of the elements in argv.  
+		I filled the other array with the second half of the elements in argv.  I then put NULL as the last element for both arrays.
+
+		*I did the activities of the previous bullet point through the fill_up function I created.
+
+		*On the parent process, I printed out the Process ID for each child by using the fork() function.
+
+		*I created two child processes with the fork() function.  On one child process, I used dup2() to copy the write-end of the pipe to the stdout file descriptor.
+
+		*On the other child process, I used dup2() to copy the read_end of the pipe to the stdin file descriptor.
+
+		*I then closed access to the pipe-ends where appropriate.
+
+		*For each child process, I called the execve() function.  Each execve() uses one of the two arrays I created.
+
+		*Then, back o nthe parent process, I used the waitpid() function to get the return values of the children.
+
+		*I then added comments and checked for errors.
+	

@@ -2,34 +2,41 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> //For time()
-#include <sys/types.h> //For getpid() and getppid()
-#include <unistd.h> //For execve()
+#include <time.h>
+#include <sys/types.h> //For waitpid
+#include <unistd.h> //For execve() and fork()
 #include <sys/wait.h> // For waitpid
-#include <sys/times.h> //For times()
+#include <sys/times.h>
+#include <string.h>
 
 
-//Descriptions for the functions are on README file.
-void execve_func(int argc, char* const argv[]);
+//Functions
+void newargv_func(int argc, char* const argv[], char *newargv1[]);//Prepares the new argv structure
+void execve_func(char* const argv[], char *newargv1[]);//Executes the supplied command
 
 int main(int argc, char* const argv[])
 {
     int status; //This int variable will be used to find the return status or value of the child process.
+    char *newargv1[argc - 1];
 
     pid_t fork_val = fork(); //Create child process
 
-    if(fork_val > 0) //On the parent process, print the child process ID on stderr
+    if(fork_val > 0){ //On the parent process, print the child process ID through stderr
         fprintf(stderr,"%s: $$ = %d\n",argv[1], fork_val);
+    }
+    else if(fork_val == 0){//If child process, then......
 
-    if(fork_val == 0){//If child process, then......
+        newargv_func(argc,argv,newargv1); //Prepares the new argv structure
+        execve_func(argv,newargv1); //Executes the supplied command
+        if(argc < 2){
 
-        execve_func(argc,argv); //Executes the supplied command
-
-        if(argc < 2 || argc > 6)
-        {
             printf("Invalid input.\n");
             return 0;
         }
+    }
+    else if(fork_val == -1){
+        perror("fork");
+        exit(EXIT_FAILURE);
     }
 
     waitpid(fork_val,&status,WUNTRACED | WCONTINUED); //Parent process waits for child process to finish
@@ -37,35 +44,33 @@ int main(int argc, char* const argv[])
     if(WIFEXITED(status)) //Get the return value of the child and print it on stderr.
         fprintf(stderr,"%s: $? = %d\n",argv[1], WEXITSTATUS(status));
 
-    printf("$\n\n");
+    fprintf(stderr,"$\n\n");
 
     return 0;
 
 }
 
-void execve_func(int argc, char* const argv[])
+void newargv_func(int argc, char* const argv[], char *newargv1[])
 {
-        char *newargv1[] = {argv[1],NULL}; //This array is used if there is only two command line argument
-        char *newargv2[] = {argv[1],argv[2],NULL}; //This array is used if there is only three command line argument
-        char *newargv3[] = {argv[1],argv[2],argv[3],NULL}; //This array is used if there is only four command line argument
-        char *newargv4[] = {argv[1],argv[2],argv[3],argv[4],NULL}; //This array is used if there is only five command line argument
-        char *newargv5[] = {argv[1],argv[2],argv[3],argv[4],argv[5],NULL}; //This array is used if there is only six command line argument
+    int x = 0;
+    int y = 1;
 
-        char *newenviron[] = {NULL};
+    while(y < argc){
+        newargv1[x] = argv[y];
+        x++;
+        y++;
+    }
+    newargv1[x] = NULL;
 
-        if (argc == 2) //Executes the supplied command when there are two command line arguments
-            execve(argv[1],newargv1, newenviron);
-        else if(argc == 3) //Executes the supplied command when there are three command line arguments
-            execve(argv[1],newargv2, newenviron);
-        else if (argc == 4)//Executes the supplied command when there are four command line arguments
-            execve(argv[1],newargv3, newenviron);
-        else if(argc == 5)
-            execve(argv[1],newargv4, newenviron);
-        else if(argc == 6)
-            execve(argv[1],newargv5, newenviron);
+    return;
+}
+void execve_func(char* const argv[], char *newargv1[])
+{
+    char *newenviron[] = {NULL};
+    execve(argv[1],newargv1,newenviron);
 
+    perror("execve"); //Error checking.
+    exit(EXIT_FAILURE);
+    return;
 
-        perror("execve"); //Error checking.
-        exit(EXIT_FAILURE);
-        return;
 }
