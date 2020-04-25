@@ -31,7 +31,7 @@ int main()
         printf("PID: %d,  \n", fork_val); //Print the child's process's ID
     }
 
-    waitpid(fork_val,&status,0); // The parent process stops right here, and waits until the child process has finished running.  The parent then continues.
+    waitpid(fork_val,&status,WUNTRACED | WCONTINUED); // The parent process stops right here, and waits until the child process has finished running.  The parent then continues.
 
     getInfo(fork_val,status);
     getTimes(fork_val,buf);
@@ -45,7 +45,8 @@ void getInfo(pid_t fork_val, int status) //Both the parent and the child use thi
         printf("PPID: %d,  ", getppid());
         printf("PID: %d,  ", getpid());
         printf("CPID: %d,  ", fork_val);
-        printf("RETVAL: %d\n",status);
+        if(WIFEXITED(status))
+            printf("RETVAL: %d\n",WEXITSTATUS(status));
     }
 
     return;
