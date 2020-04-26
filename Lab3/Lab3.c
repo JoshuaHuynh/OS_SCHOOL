@@ -5,9 +5,9 @@
 #include <time.h> //For time()
 #include <sys/types.h> //For getpid(),kill()
 #include <unistd.h> //For getpid(), pause()
-#include <sys/wait.h> // For waitpid
-#include <sys/times.h> //For times()
-#include <signal.h>
+#include <sys/wait.h>
+#include <sys/times.h>
+#include <signal.h> //For signal()
 #include <string.h>
 #include <ctype.h>
 

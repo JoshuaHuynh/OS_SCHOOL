@@ -1,0 +1,21 @@
+Activity Log for Lab 3 by Joshua Huynh:
+
+* Quick details or summary of what I did to write the program for Lab 3. (April 25, 2020 to April 26,2020).
+
+	*I start off by printing the Process ID through stderr.
+
+	*I then created an array to hold the signals from argv.
+
+	*In order to make the program run continously, I made an infinite loop. I put a pause() function inside the loop.
+
+	*I made a global variable specifically for breaking out of the infinite loop after the user sends three SIGTERM signals to the process.
+	
+	*In order to handle signals or interrupts, I created a signal handler function.
+
+	*The signal handler function prints the name of the signal that was caught and shows the time it was caught.
+	
+	*The register_handler() function I created registers a handler for each command-line argument twice.
+
+	*The getSigName() function I created returns the name of a signal in string.
+	
+	*Then I checked for errors.
