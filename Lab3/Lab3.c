@@ -20,7 +20,8 @@ void register_handler(char *signals[],int signalNum, int argc); //Registers a ha
 int main(int argc, char* const argv[])
 {
     char sigChar[5] = "SIG";
-    char *signals[argc - 1];
+    char temp[100];
+    char* signals[argc - 1];
 
     int signalNum = 0;
 
@@ -29,7 +30,9 @@ int main(int argc, char* const argv[])
     int i = 1;
     while(i < argc){ //Concatenate "SIG" in the beginning of each string from the command line argument.
         strcat(sigChar,argv[i]);
-        signals[x] = sigChar;
+        strcpy(temp,sigChar);
+        signals[x] = temp;
+        fprintf(stderr,"%s\n",signals[x]);
         strcpy(sigChar,"SIG");
         i++;
         x++;
@@ -139,6 +142,8 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
             signalNum = 28;
         else
             signalNum = 0;
+
+        //fprintf(stderr,"\n%s%d\n",signals[1],signalNum);
 
         signal(signalNum,signalHandler);
 
