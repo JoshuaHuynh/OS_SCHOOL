@@ -17,7 +17,7 @@ int loop_breaker = 0;
 //Functions
 void signalHandler(int y); //User made function for handling signals
 void register_handler(char *signals[],int signalNum, int argc); //Registers a handler for each argument twice.
-char* getSigName(int signalNum,char name[]);
+char* getSigName(int signalNum,char name[]); //Returns name of signal number
 
 
 int main(int argc, char* const argv[])
@@ -31,7 +31,7 @@ int main(int argc, char* const argv[])
     fprintf(stderr,"catcher: $$ = %d\n",getpid());
     int x = 0;
     int i = 1;
-    while(i < argc){ //Concatenate "SIG" in the beginning of each string from the command line argument.
+    while(i < argc){ // Putting the list of signals into the signals array.
 
 
         signals[x] = argv[i];
@@ -40,9 +40,7 @@ int main(int argc, char* const argv[])
         x++;
     }
 
-    fprintf(stderr,"1. %s\n",signals[0]);
-    fprintf(stderr,"2. %s\n",signals[1]);
-    fprintf(stderr,"3. %s\n",signals[2]);
+
 
     register_handler(signals,signalNum,argc);
 
@@ -75,7 +73,7 @@ void signalHandler(int y) //User made function for handling signals
 
 
     count++;
-    fprintf(stderr,"%s caught at %ld\n", getSigName(y,name),time(NULL));
+    printf("%s caught at %ld\n", getSigName(y,name),time(NULL));
 
     if(y != 0)
         count++;
@@ -155,8 +153,9 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
         i++;
     }
 
+
     i = 0;
-    while(i < (argc - 1)){ ////Register a handler for each argument again.
+    while(i < (argc - 1)){ //Register a handler for each argument again.
         if(strcmp(signals[i],"HUP") == 0)
             signalNum = 1;
         else if(strcmp(signals[i],"INT") == 0)
@@ -189,7 +188,7 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
             signalNum = 15;
         else if(strcmp(signals[i],"STKFLT") == 0)
             signalNum = 16;
-        else if(strcmp(signals[i],"CHLD") == 0)
+        else if(strcmp(signals[i],"SIGCHLD") == 0)
             signalNum = 17;
         else if(strcmp(signals[i],"CONT") == 0)
             signalNum = 18;
@@ -214,11 +213,12 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
         else
             signalNum = 0;
 
-
         signal(signalNum,signalHandler);
         i++;
-
     }
+
+
+
 }
 //**********************************************
 
