@@ -1,0 +1,11 @@
+#!/bin/bash
+
+seats=$1
+
+myvar=0
+
+while(($myvar < $seats))
+do
+	./dining-p $seats $myvar
+	myvar=$(( $myvar + 1))
+done 
