@@ -1,0 +1,29 @@
+Activity Log for Lab 4 by Joshua Huynh:
+
+* Quick details or summary of what I did to write the program for Lab 4. (April 27, 2020 to May 1,2020).
+	
+	*I developed two functions, eat() and think().  However, these functions do not work properly.
+
+	*On the C file, I converted the char values in argv into long values.  I did this with the strtol() function.
+
+	*I then created an array of semaphores. Each semaphore represents a chopstick in this array.  I used sem_init() to create semaphores.
+
+	*In order to make the program run continously, I made an infinite loop. 
+
+	*I made a global variable specifically for breaking out of the infinite loop after the user sends a SIGTERM signal to the Process group ID.
+	
+	*Semaphores are placed appropriately in the loop.  Philosopher must pick up or sem_wait() each of the two chopsticks before calling eat().
+
+	*Philosopher must put down or sem_post two chopsticks before calling the eat() function.
+	
+	*The register_handler() function I created registers a handler for SIGTERM.
+
+	*Then I finished part 1 for lab 4.  I wrote code to release system resources by using sem_destroy() and wrote code to print stuff to console.
+	
+	*Then I did part 2 by adding a mutex.  Each process needs to acquire a mutex to enter critical section in the infinite loop.
+
+	*I got the eat() and think() functions to work.
+
+	*Finished part 3 on May 1st by creating the shell script, creating the process group, etc.
+	
+	*Tested the program, polished the program, added comments, and checked for errors. (Also on May 1st).

@@ -17,9 +17,9 @@ int loop_breaker = 0;
 
 
 //Functions
-void eat(int philPosition);//Philosopher eat after successfully acquiring two chopsticks
-void think(int philPosition);//Philosopher thinking and consuming time when not holding any chopsticks
-void signalHandler(int y); //User made function for handling signals
+void eat(int philPosition);//Philosopher eats for a random amount of time after successfully acquiring two chopsticks
+void think(int philPosition);//Philosopher thinking and consuming a random amount of time after putting down two chopsticks.
+void signalHandler(int y); //User made function for handling signals.  Breaks the infinite loop.
 sem_t mutex;
 int main(int argc,char* const argv[])
 {
@@ -28,7 +28,8 @@ int main(int argc,char* const argv[])
     pid_t processId = getpid();
     setpgid(processId,getpgid(processId));
 
-    signal(SIGTERM,signalHandler);
+    signal(SIGTERM,signalHandler); //Registers a handler for SIGTERM
+    signal(SIGTERM,signalHandler); //Registers a handler for SIGTERM
 
     int count = 0; // count of the number of full eat-think cycles
     long num = strtol(argv[1],NULL,10); //Seats
@@ -47,7 +48,7 @@ int main(int argc,char* const argv[])
         i++;
     }
     i = 0;
-    while(i < numChopsticks){
+    while(i < numChopsticks){ //Allocate a semaphore for each chopstick
         chopstick[i] = &temp[i];
         i++;
     }
