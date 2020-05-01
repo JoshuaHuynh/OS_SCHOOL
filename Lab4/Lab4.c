@@ -13,11 +13,7 @@
 #include <errno.h>
 
 
-
-
-
 int loop_breaker = 0;
-
 
 
 //Functions
@@ -43,12 +39,7 @@ int main(int argc,char* const argv[])
     sem_t temp[numChopsticks];
     sem_t*  chopstick[numChopsticks]; //Chopsticks
 
-    //sem_t* theSemaphore;
-
-    //theSemaphore = sem_open("/semaphore1",O_CREAT|O_EXCL,0666, 1);
     sem_init(&mutex,1,1);
-
-
 
     int i = 0;
     while(i < numChopsticks){
@@ -90,9 +81,7 @@ int main(int argc,char* const argv[])
         count++;
     } while (1);
 
-    while ((wait(&status)) > 0);
-
-    //waitpid(getpgid(processId),&status,WUNTRACED | WCONTINUED);
+    while ((wait(&status)) > 0); //Waits for all children.
 
     i = 0;
     while(i < numChopsticks){
@@ -100,10 +89,7 @@ int main(int argc,char* const argv[])
         i++;
     }
 
-
     sem_destroy(&mutex);
-    //sem_close(theSemaphore);
-    //sem_unlink("/semaphore1");
 
     fprintf(stderr,"Philosopher #%d completed %d cycles\n",(int)num2,count);
 
@@ -137,8 +123,6 @@ void signalHandler(int y) //User made function for handling signals
 {
     if(y == 15)
         loop_breaker = 1;
-
-
 
 }
 
