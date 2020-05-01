@@ -28,7 +28,7 @@ sem_t mutex;
 int main(int argc,char* const argv[])
 {
     (void)argc;
-    //int status;
+    int status;
     pid_t processId = getpid();
     setpgid(processId,getpgid(processId));
 
@@ -90,7 +90,7 @@ int main(int argc,char* const argv[])
         count++;
     } while (1);
 
-
+    while ((wait(&status)) > 0);
 
     //waitpid(getpgid(processId),&status,WUNTRACED | WCONTINUED);
 
