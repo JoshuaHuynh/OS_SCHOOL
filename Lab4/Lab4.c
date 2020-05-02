@@ -3,28 +3,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <sys/types.h> //For waitpid
-#include <unistd.h> //For execve() and fork()
-#include <sys/wait.h> // For waitpid
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 #include <string.h>
 #include <semaphore.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
 
-
-int loop_breaker = 0;
+//Global variable
+int loop_breaker = 0; //For breaking out of infinite loop
 
 
 //Functions
 void eat(int philPosition);//Philosopher eats for a random amount of time after successfully acquiring two chopsticks
 void think(int philPosition);//Philosopher thinking and consuming a random amount of time after putting down two chopsticks.
 void signalHandler(int y); //User made function for handling signals.  Breaks the infinite loop.
-sem_t mutex;
+sem_t mutex;// A semaphore that acts as a mutex.
+
 int main(int argc,char* const argv[])
 {
     (void)argc;
     int status;
+    int errorNum;
     pid_t processId = getpid();
     setpgid(processId,getpgid(processId));
 
@@ -40,11 +42,19 @@ int main(int argc,char* const argv[])
     sem_t temp[numChopsticks];
     sem_t*  chopstick[numChopsticks]; //Chopsticks
 
-    sem_init(&mutex,1,1);
+    errorNum = sem_init(&mutex,1,1);
+    if(errorNum == -1){ //Checking to see if there were any problems creating the semaphore.
+        perror("sem_init");
+        exit(EXIT_FAILURE);
+    }
 
     int i = 0;
     while(i < numChopsticks){
-        sem_init(&temp[i],1,1);
+        errorNum = sem_init(&temp[i],1,1);
+        if(errorNum == -1){ //Checking to see if there were any problems creating the semaphore.
+            perror("sem_init");
+            exit(EXIT_FAILURE);
+        }
         i++;
     }
     i = 0;
@@ -54,9 +64,7 @@ int main(int argc,char* const argv[])
     }
 
 
-
     do {
-
 
         sem_wait(&mutex);
         /////////////////// Entering Critical section
@@ -86,11 +94,18 @@ int main(int argc,char* const argv[])
 
     i = 0;
     while(i < numChopsticks){
-        sem_destroy(chopstick[i]);
+        errorNum = sem_destroy(chopstick[i]);
+        if(errorNum == -1){ //Checking to see if there were any problems destroying the semaphore.
+            perror("sem_destroy");
+        }
         i++;
     }
 
-    sem_destroy(&mutex);
+    errorNum = sem_destroy(&mutex);
+    if(errorNum == -1){ //Checking to see if there were any problems destroying the semaphore.
+        perror("sem_destroy");
+
+    }
 
     fprintf(stderr,"Philosopher #%d completed %d cycles\n",(int)num2,count);
 
