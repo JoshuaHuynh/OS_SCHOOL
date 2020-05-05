@@ -22,6 +22,10 @@ char* getSigName(int signalNum,char name[]); //Returns name of signal number
 
 int main(int argc, char* const argv[])
 {
+    if (argc == 1){ //If user did not input anything for the command line arguments, then end the program.
+        printf("There are no command line arguments.\n");
+        return 0;
+    }
 
     char* signals[argc - 1];
 
