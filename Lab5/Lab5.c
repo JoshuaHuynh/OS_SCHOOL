@@ -17,7 +17,7 @@ void findOffset(uint32_t virtualAddress); //This function calculates the page of
 
 int main(int argc, char* const argv[])
 {
-    if (argc == 0){ //If user did not input any numbers in the command line, then end the program.
+    if (argc == 1){ //If user did not input any numbers in the command line, then end the program.
         printf("Please enter a virtual address.\n");
         return 0;
     }

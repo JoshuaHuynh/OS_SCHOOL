@@ -124,7 +124,7 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
             signalNum = 15;
         else if(strcmp(signals[i],"STKFLT") == 0)
             signalNum = 16;
-        else if(strcmp(signals[i],"SIGCHLD") == 0)
+        else if(strcmp(signals[i],"CHLD") == 0)
             signalNum = 17;
         else if(strcmp(signals[i],"CONT") == 0)
             signalNum = 18;
@@ -188,7 +188,7 @@ void register_handler(char *signals[],int signalNum, int argc) //Registers a han
             signalNum = 15;
         else if(strcmp(signals[i],"STKFLT") == 0)
             signalNum = 16;
-        else if(strcmp(signals[i],"SIGCHLD") == 0)
+        else if(strcmp(signals[i],"CHLD") == 0)
             signalNum = 17;
         else if(strcmp(signals[i],"CONT") == 0)
             signalNum = 18;
