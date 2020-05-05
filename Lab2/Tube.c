@@ -51,7 +51,7 @@ int main(int argc, char* const argv[])
         if(fork_val2 > 0){
             fprintf(stderr,"%s: $$ = %d\n",argv[4], fork_val2); //Print PID of second child on stderr
             waitpid(fork_val,&status,WUNTRACED | WCONTINUED);
-            fprintf(stderr,"\n");
+            printf("\n");
             waitpid(fork_val2,&status2,WUNTRACED | WCONTINUED);
         }
         else if(fork_val2 == 0){ //Child
@@ -89,7 +89,8 @@ int main(int argc, char* const argv[])
     if(WIFEXITED(status2))
         fprintf(stderr,"%s:  $? = %d\n",argv[comma_pos + 1], WEXITSTATUS(status2));
 
-    fprintf(stderr,"$\n");
+
+    printf("\n");
 
     return 0;
 

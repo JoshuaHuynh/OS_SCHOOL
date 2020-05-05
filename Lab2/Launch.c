@@ -44,7 +44,7 @@ int main(int argc, char* const argv[])
     if(WIFEXITED(status)) //Get the return value of the child and print it on stderr.
         fprintf(stderr,"%s: $? = %d\n",argv[1], WEXITSTATUS(status));
 
-    fprintf(stderr,"$\n\n");
+    printf("\n");
 
     return 0;
 
