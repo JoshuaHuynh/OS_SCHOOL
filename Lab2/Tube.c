@@ -21,7 +21,10 @@ int main(int argc, char* const argv[])
     int comma_pos = 0; //The index of where the comma is located in argv.
     int last_argv = argc - 1;
 
-
+    if (argc == 1){ //If user did not input anything for the command line arguments, then end the program.
+        printf("There are no command line arguments. Please input them.\n");
+        return 0;
+    }
 
     if(pipe(pipefd) == -1){ //If there is an error with the pipe
         perror("pipe");

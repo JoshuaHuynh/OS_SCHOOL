@@ -19,6 +19,11 @@ int main(int argc, char* const argv[])
     int status; //This int variable will be used to find the return status or value of the child process.
     char *newargv1[argc - 1];
 
+    if (argc == 1){ //If user did not input anything for the command line arguments, then end the program.
+        printf("There are no command line arguments. Please input them.\n");
+        return 0;
+    }
+
     pid_t fork_val = fork(); //Create child process
 
     if(fork_val > 0){ //On the parent process, print the child process ID through stderr
