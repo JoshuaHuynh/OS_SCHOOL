@@ -21,14 +21,15 @@ int main(int argc, char** argv)
     unsigned int x = 0;
     int way = 0;
 
+    if(argc == 1){ // Checking for command line arguments
+        printf("%s","Error. Invalid input.\n");
+        return 0;
+    }
 
     if(argv[1][0] == '-' &&  strlen(argv[1]) == 1){ //If argv starts with -
-
         numc = 2;
         while (numc < argc){ //Iterate through the binary numbers
-
             while(x < strlen(argv[numc])){ //Iterate through the binary number set
-
                 if(argv[numc][x] != '1' && argv[numc][x] != '0') //Check if there is anything that is not one or zero
                     way = 1;
                 x++;
@@ -40,9 +41,7 @@ int main(int argc, char** argv)
     else{
         numc = 1;
         while (numc < argc){ //Iterate through the binary numbers
-
             while(x < strlen(argv[numc])){ //Iterate through the binary number set
-
                 if(argv[numc][x] != '1' && argv[numc][x] != '0') //Check if there is anything that is not one or zero
                     way = 1; //If a char is neither '1' nor '0', then assign 1 to the variable way.
                 x++;
@@ -52,29 +51,18 @@ int main(int argc, char** argv)
         }
     }
 
-    if(argc == 0 || argc == 1){ // Checking for command line arguments
 
-        printf("%s","Error. Invalid input.\n");
-        return 0;
-    }
-    else if(argc == 2 && argv[1][0] == '-' && strlen(argv[1]) == 5){ //Checking if text file is named as -
-
+    if(argc == 2 && argv[1][0] == '-' && strlen(argv[1]) == 5){ //Checking if text file is named as -
         printf("%s","Error. Invalid input.\n");
         return 0;
     }
     else if(argc == 2 && argv[1][0] == '-' && strlen(argv[1]) < 2){ //Checking if input is only -
-
         printf("%s","Error. Invalid input.\n");
         return 0;
     }
 
-
-
-    if(way == 0){  // If there are only ones and zeros.
-
-
+    if(way == 0){  //The command line arguments does not contain any files, just binary numbers.
         if(argv[1][0] == '-' &&  strlen(argv[1]) == 1){ //If there only ones and zeros, but the beginning has a -
-
             numc = 2;
             int par_check = 0;
             int parity[argc];
@@ -82,22 +70,17 @@ int main(int argc, char** argv)
             char asc[argc];
             char asc_beg[6];
             char temp[6];
-            int po = 7;
+            int po = 7; //The exponent.
             int sum = 0;
             x = 0;
 
             while (numc < argc){ //Iterate through the binary numbers
-
                 while(x < strlen(argv[numc])){ // iterate through binary number set and calculate the decimal for that set
-
                     if(argv[numc][x] == '1'){
-
                         if(x == 0){
-
                            par_check++;
                         }
                         else{
-
                             sum = sum + pow(2,po);
                             par_check++;
                         }
@@ -108,7 +91,6 @@ int main(int argc, char** argv)
 
                 asc[numc] = sum;
                 if(isascii(sum) != 1){ //If value is not ASCII, then ....
-
                     printf("Error. Please input ASCII values only.\n");
                     return 0;
                 }
@@ -132,31 +114,25 @@ int main(int argc, char** argv)
             unsigned int remain = 0;
 
             while(numc < argc){ //Iterate through the binary numbers
-
                 printf("%s",argv[numc]); //Print the binary number set
 
                 if(strlen(argv[numc]) < 8) // Calculates how much digits are missing from the 8 digit set
                     remain = 8 - strlen(argv[numc]);
 
                 while(x < remain){ //Pad with zeros if binary number set is less than 8 digits
-
                     printf("%d",0);
                     x++;
                 }
 
 
                 if(parity[numc] == 0){ //If parity of the binary number is even
-
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], even);
                     else{
-
                         if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
-
                             strcpy(asc_beg, getMnemonic(dec[numc],temp));
 
                             if(isascii(dec[numc]) != 1){
-
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
@@ -165,17 +141,13 @@ int main(int argc, char** argv)
                     }
                 }
                 else if (parity[numc] != 0){ //If parity is odd then.....
-
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], odd);
                     else{
-
                         if(dec[numc] >= 0 && dec[numc] <= 32){ // Assigning mnemonics to the decimal values that don't have ASCII characters
-
                             strcpy(asc_beg, getMnemonic(dec[numc],temp));
 
                             if(isascii(dec[numc]) != 1){
-
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
@@ -195,7 +167,6 @@ int main(int argc, char** argv)
 
         }
         else if(argv[1][0] != '-'){
-
             numc = 1;
             int par_check = 0;
             int parity[argc];
@@ -208,17 +179,12 @@ int main(int argc, char** argv)
             x = 0;
 
             while (numc < argc){ // Iterate through the binary numbers
-
                 while(x < strlen(argv[numc])){ // iterate through binary number set and calculate the decimal for that set
-
                     if(argv[numc][x] == '1'){
-
                         if(x == 0){
-
                            par_check++;
                         }
                         else{
-
                             sum = sum + pow(2,po);
                             par_check++;
                         }
@@ -229,7 +195,6 @@ int main(int argc, char** argv)
 
                 asc[numc] = sum;
                 if(isascii(sum) != 1){ //If value is not ASCII, then...
-
                     printf("Error. Please input ASCII values only.\n");
                     return 0;
                 }
@@ -253,31 +218,25 @@ int main(int argc, char** argv)
             unsigned int remain = 0;
 
             while(numc < argc){ //Iterate through the binary numbers
-
                 printf("%s",argv[numc]); //Print the binary number set
 
                 if(strlen(argv[numc]) < 8) // Calculates how much digits are missing from the 8 digit set
                     remain = 8 - strlen(argv[numc]);
 
                 while(x < remain){ //Pad with zeros if binary number set is less than 8 digits
-
                     printf("%d",0);
                     x++;
                 }
 
 
                 if(parity[numc] == 0){
-
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], even);
                     else{
-
                         if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
-
                             strcpy(asc_beg, getMnemonic(dec[numc],temp));
 
                             if(isascii(dec[numc]) != 1){
-
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
@@ -286,17 +245,13 @@ int main(int argc, char** argv)
                     }
                 }
                 else if (parity[numc] != 0){
-
                     if(dec[numc] > 32)
                         printf("        %5c      %4d    %4s",asc[numc], dec[numc], odd);
                     else{
-
                         if(dec[numc] >= 0 && dec[numc] <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
-
                             strcpy(asc_beg, getMnemonic(dec[numc],temp));
 
                             if(isascii(dec[numc]) != 1){
-
                                 printf("Error. Please input ASCII values only.\n");
                                 return 0;
                             }
@@ -321,7 +276,7 @@ int main(int argc, char** argv)
 
     ///////////////
 
-    else if(way == 1){
+    else if(way == 1){//When the command line argument has a file.
 
         int BUFFER_SIZE = 100;
         int i = 0;
@@ -331,7 +286,6 @@ int main(int argc, char** argv)
         int fd = open(argv[1], O_RDONLY);
 
         if(fd == -1){ //If file cannot open
-
             printf("Error. Invalid input.\n");
             return 0;
         }
@@ -357,11 +311,8 @@ int main(int argc, char** argv)
 
 
         while(n == BUFFER_SIZE){ //If file size is bigger than buffer size, read again
-
             while(i <BUFFER_SIZE){ //Scan through bufr for spaces
-
                 if(!isspace(bufr[i])){ // Print set if space is not found
-
                     bufset[bit_i] = bufr[i];
                     printf("%c",bufset[bit_i]);
                     bit_i++;
@@ -369,30 +320,22 @@ int main(int argc, char** argv)
                 }
 
                 else{ // When isspace
-
                     if(bit_i <= 7){
-
                         remain1 = 8 - (bit_i);
 
                         while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
-
                             printf("%c",'0');
                             y++;
                         }
-
                     }
 
                     y = 0;
                     while(y < bit_i){
-
                         if(bufset[y] == '1'){
-
                             if(y == 0){
-
                                 par_check1++;
                             }
                             else{
-
                                 sum1 = sum1 + pow(2,exp);
                                 par_check1++;
                             }
@@ -404,7 +347,6 @@ int main(int argc, char** argv)
 
 
                     if(isascii(sum1) != 1){
-
                         printf("Error. Please input ASCII values only.\n");
                         return 0;
                     }
@@ -412,21 +354,17 @@ int main(int argc, char** argv)
                     asc_char = sum1;
 
                     if(sum1 >= 0 && sum1 <= 32){  // Assign mnemonic to the decimal value that don't have ASCII characters
-
                         strcpy(asc_val, getMnemonic(sum1,temp1));
                     }
 
 
                     if((par_check1 % 2) == 0){ //If parity is even.
-
-
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s", asc_val, sum1, even1);
                         else
                             printf("        %5c      %4d    %4s", asc_char, sum1, even1);
                     }
                     else{ //If parity is odd.
-
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
                         else
@@ -455,9 +393,7 @@ int main(int argc, char** argv)
         i = 0;
 
         while(i < n){ // If n >0 and < BUFFER_SIZE, then...
-
             if(!isspace(bufr[i])){ // Scan through bufr for spaces. Print binary number set if there is no space yet
-
                 bufset[bit_i] = bufr[i];
                 printf("%c",bufset[bit_i]);
                 bit_i++;
@@ -466,43 +402,33 @@ int main(int argc, char** argv)
             }
 
             else{ //Space is found
-
                     if(bit_i <= 7){ // If there is less than 8 bits in the binary number...
-
                         remain1 = 8 - (bit_i);
 
                         while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
-
                             printf("%c",'0');
                             y++;
                         }
-
-
                     }
 
                     y = 0;
                     while(y < bit_i){ //Loop to find parity and decimal of binary number
-
                         if(bufset[y] == '1'){
-
                             if(y == 0){
-
                                 par_check1++;
                             }
                             else {
-
                                 sum1 = sum1 + pow(2,exp);
                                 par_check1++;
                             }
                         }
 
-                            y++;
-                            exp--;
+                        y++;
+                        exp--;
                     }
 
 
                     if(isascii(sum1) != 1){ //If the value is not an ASCII.
-
                         printf("Error. Please input ASCII values only.\n");
                         return 0;
                     }
@@ -510,19 +436,16 @@ int main(int argc, char** argv)
                     asc_char = sum1;
 
                     if(sum1 >= 0 && sum1 <= 32){
-
                         strcpy(asc_val, getMnemonic(sum1,temp1));
                     }
 
                     if((par_check1 % 2) == 0){
-
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s", asc_val, sum1, even1);
                         else
                             printf("        %5c      %4d    %4s", asc_char, sum1, even1);
                     }
                     else {
-
                         if(sum1 >= 0 && sum1 <= 32)
                             printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
                         else
@@ -547,26 +470,19 @@ int main(int argc, char** argv)
 
         }
         else{
-
             if(bit_i <= 7){ // If there is less than 8 bits in the binary number...
-
                 remain1 = 8 - (bit_i);
 
                 while(y < remain1){ //If binary number is less than 8 digits, pad with zeros.
-
                     printf("%c",'0');
                     y++;
                 }
-
             }
 
             y = 0;
             while(y < bit_i){ //This loop is to find the parity and decimal of the binary number
-
                 if(bufset[y] == '1'){
-
                     if(y == 0){
-
                         par_check1++;
                     }
                     else{
@@ -581,7 +497,6 @@ int main(int argc, char** argv)
             }
 
             if(isascii(sum1) != 1){
-
                 printf("Error. Please input ASCII values only.\n");
                 return 0;
             }
@@ -589,20 +504,16 @@ int main(int argc, char** argv)
             asc_char = sum1;
 
             if(sum1 >= 0 && sum1 <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
-
                 strcpy(asc_val, getMnemonic(sum1,temp1));
             }
 
             if((par_check1 % 2) == 0){
-
-
                 if(sum1 >= 0 && sum1 <= 32)
                     printf("        %5s      %4d    %4s", asc_val, sum1, even1);
                 else
                     printf("        %5c      %4d    %4s", asc_char, sum1, even1);
             }
             else{
-
                 if(sum1 >= 0 && sum1 <= 32)
                     printf("        %5s      %4d    %4s",asc_val , sum1, odd1);
                 else
@@ -630,10 +541,8 @@ int main(int argc, char** argv)
 
 char* getMnemonic(int number, char* asc_val)
 {
-    //const char asc_val[6];
 
     if(number >= 0 && number <= 32){  // Assigning mnemonics to the decimal values that don't have ASCII characters
-
         if(number == 0)
             strcpy(asc_val,"NUL");
         else if(number == 1)
