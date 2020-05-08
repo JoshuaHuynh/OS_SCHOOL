@@ -5,13 +5,16 @@
 #include <time.h> //For getrlimit()
 #include <sys/types.h>
 #include <unistd.h> //For setsid(), fork(), chdir(), and dup()
-#include <sys/times.h>
+#include <sys/time.h>
 #include <string.h>
 #include <stdint.h> //For uint32_t
 #include <ctype.h>
 #include <sys/stat.h> //For umask()
-#include <resource.h> //For getrlimit()
+#include <sys/resource.h> //For getrlimit()
 #include <signal.h> // For signal()
+#include <string.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 
 struct rlimit rlim;
 int loop_breaker = 0; //For breaking out of infinite loop.
@@ -26,10 +29,11 @@ void signalHandler(int y);
 
 int main(int argc, char* const argv[])
 {
+    (void)argc;
+    (void) argv;
     mode_t mask = 0;
     int errorNum = 0;
-    int fd0,fd1,fd2; //File descriptors
-    int i = 0;
+    unsigned int i = 0;
     int moleNum = 0;
     int status;
     char mole[6];
@@ -78,9 +82,9 @@ int main(int argc, char* const argv[])
         i++;
     }
 
-    fd0 = open("/dev/null",O_RDWR); //Reopen the standard file descriptors to map to /dev/null
-    fd1 = dup(0);
-    fd2 = dup(0);
+    open("/dev/null",O_RDWR); //Reopen the standard file descriptors to map to /dev/null
+    dup(0);
+    dup(0);
 
 
     registerHandler();
@@ -90,7 +94,7 @@ int main(int argc, char* const argv[])
 
         if(loop_breaker == 1)
             break;
-        if(createMole = 1){
+        if(createMole == 1){
             createMole = 0;
             moleNum = rand();
             moleNum = moleNum % 2;
@@ -104,7 +108,7 @@ int main(int argc, char* const argv[])
                 else if(molePid == 0){
                     sprintf(mole,"mole%d", moleNum);
                     strcpy(buf1[0],mole);
-                    strcpy(buf1[1],NULL);
+                    buf1[1] = NULL;
                     execv("./mole",buf1);
                 }
                 else if(molePid == -1){
@@ -149,7 +153,7 @@ void signalHandler(int y)
     }
 
     if(y == SIGUSR1){
-        if(moleExisting = 1){
+        if(moleExisting == 1){
             kill(molePid,SIGTERM);
             moleExisting = 0;
 
@@ -159,7 +163,7 @@ void signalHandler(int y)
     }
 
     if(y == SIGUSR2){
-        if(moleExisting = 2){
+        if(moleExisting == 2){
             kill(molePid,SIGTERM);
             moleExisting = 0;
         }
