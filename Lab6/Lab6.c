@@ -108,7 +108,8 @@ int main(int argc, char* const argv[])
                     execv("./mole",buf1);
                 }
                 else if(molePid == -1){
-
+                    perror("fork");
+                    exit(EXIT_FAILURE);
                 }
 
             }
