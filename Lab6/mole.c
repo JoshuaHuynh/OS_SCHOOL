@@ -20,9 +20,9 @@
 int main(int argc, char* const argv[])
 {
     (void) argc;
-    FILE *logfile = fopen("./lab6.log", "w+");
+    FILE *logfile = fopen("./lab6.log", "w+"); //Create lab6.log if it doesn't exists. If lab6.log exists, then it will be overwritten.
 
-    fprintf(logfile, "Pop %s\n", argv[0]);
+    fprintf(logfile, "Pop %s\n", argv[0]); //Write in lab6.log.
 
     return 0;
 }
