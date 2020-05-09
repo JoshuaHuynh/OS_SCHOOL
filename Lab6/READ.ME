@@ -1,0 +1,27 @@
+Activity Log for Lab 6 by Joshua Huynh:
+
+* Quick details or summary of what I did to write the program for Lab 6. (May 8, 2020 to May 9, 2020).
+	
+	*First, I wrote the code to create a daemon. For example, I set the file creation mask to 0, changed the process's working directory to "/", etc. (May 8)
+	
+	*After creating the daemon process, I registered a handler for each signal. The signals are SIGTERM, SIGUSR1, and SIGUSR2. (May 8)
+	
+	*I created a function named registerHandler() to register a handler for each signal. (May 8)
+	
+	*I created a handler for signals named signalHandler(). The handler handles the three signals mentioned previously. The handler mostly changes global variables and kill children processes. (May 8)
+	
+	*I made an infinite loop in the main function. In the loop, there is code that creates a mole (child process) and code that breaks the infinite loop. (May 8)
+	
+	*What happens in the loop depends on the signal the daemon receives. Signals changes the global variables. The global variables determines what happens in the loop. (May 8)
+	
+	*I used rand() to help randomly create either mole1 or mole2. (May 8)
+	
+	*In order to be able to exec the program mole, in the child process, I changed the current directory of the child process back to the old working directory from before the daemon was created. (May 9)
+	
+	*I used getcwd() to get the old working directory. (May 9)
+	
+	*I then tested out Lab 6, put comments throughout the code, and checked for errors. (May 9)
+	
+	
+
+	
