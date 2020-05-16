@@ -10,7 +10,7 @@
 #include <aio.h>
 
 
-int main()
+int main(int argc, char* const argv[])
 {
 
     int status;
@@ -18,7 +18,7 @@ int main()
     int oneOrZero = rand() % 2;
     int block_size = 0;
     int blocks = 0;
-    int size1 = argv[1]
+    int size1 = 0;
     int scalar = (rand() % 100) + oneOrZero;
     int x;
     int y;
