@@ -25,6 +25,7 @@ void matrix_add(int curBlock[rows][cols],int block_size,int scalar);
 int main(int argc, char* const argv[])
 {
     (void)argc;
+    srand(time(NULL));
     int theSign = rand() % 2;
     int oneOrZero = rand() % 2;
     int block_size = 0;

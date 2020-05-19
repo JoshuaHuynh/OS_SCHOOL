@@ -13,7 +13,7 @@
 int main(int argc, char* const argv[])
 {
     (void)argc;
-
+    srand(time(NULL));
     int theSign = rand() % 2;
     int oneOrZero = rand() % 2;
     int size1 = 0;
@@ -31,7 +31,7 @@ int main(int argc, char* const argv[])
     for(i = 0; i < size1; i++){
         for(y = 0; y < size1; y++){
             randNum = (rand() % 100) + oneOrZero;
-
+            theSign = rand() % 2;
             if (theSign == 0)
                 randNum = randNum * 1;
             else if(theSign == 1)
