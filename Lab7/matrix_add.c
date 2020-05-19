@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <fcntl.h>
+#include<errno.h>
 
 
 struct aiocb aio;
@@ -40,6 +41,7 @@ int main(int argc, char* const argv[])
     int stop = 0;
     int blockRow = 0, blockCol = 0;
     char numPrint[200] = "";
+    long temp;
 
 
     if (theSign == 0)
@@ -68,7 +70,6 @@ int main(int argc, char* const argv[])
 
     memset(&aiow,0,sizeof(struct aiocb));
     aiow.aio_fildes = STDOUT_FILENO;
-    aiow.aio_buf = numPrint;
 
     aiow.aio_offset = 0;
 
@@ -79,27 +80,32 @@ int main(int argc, char* const argv[])
             strcpy(current,"");
             while(aio_read(&aio) == 0){ //This loop breaks after current block is filled up.
                 aio_return(&aio);
+                while(aio_error(&aio) == EINPROGRESS){
 
+                }
                 if (strcmp(one,"0") == 0 || strcmp(one,"1") == 0|| strcmp(one,"2") == 0|| strcmp(one,"3") == 0|| strcmp(one,"4") == 0|| strcmp(one,"5") == 0|| strcmp(one,"6") == 0|| strcmp(one,"7") == 0|| strcmp(one,"8") == 0|| strcmp(one,"9") == 0|| strcmp(one,"-") == 0){
                     strcat(current,one);
                 }
                 else if(strcmp(one,"\n") == 0 || strcmp(one," ") == 0){
-                    long temp = strtol(current,NULL,10);
+                    temp = strtol(current,NULL,10);
                     curBlock[blockRow][blockCol] = (int)temp;
-                    if(blockCol == block_size - 1){
-                        //if(blockRow != (block_size - 1))
+
+                    blockCol++;
+                    if(blockCol == block_size){
                         blockRow++;
                         blockCol = 0;
                     }
+                    strcpy(current,"");
 
-                    blockCol++;
                     stop++;
                 }
 
-                aio.aio_offset = offNum + 1;
-
+                offNum++;
+                aio.aio_offset = (off_t)offNum;
+                //printf("%s",one);
                 if(stop == (block_size *block_size)){
                     blockRow = 0;
+                    blockCol = 0;
                     stop = 0;
                     break;
 
@@ -110,15 +116,18 @@ int main(int argc, char* const argv[])
 
             for(i = 0; i < block_size; i++){
                 for(j = 0; j < block_size; j++){
-                    //itoa(curBlock[i][j],numPrint,10);
-                    sprintf(numPrint,"%d",curBlock[i][i]);
+                    sprintf(numPrint,"%d ",curBlock[i][i]);
+                    aiow.aio_buf = numPrint;
                     n = strlen(numPrint);
                     aiow.aio_nbytes = (int)n;
                     aio_write(&aiow);
                     aio_return(&aiow);
+                    while(aio_error(&aiow) == EINPROGRESS){
+
+                    }
                     curSize++;
 
-                    printf(" ");
+
                     if(curSize == size1){
                         curSize = 0;
                         printf("\n");
@@ -134,8 +143,7 @@ int main(int argc, char* const argv[])
 
     timeFinish = endTime - startTime;
 
-    fprintf(stderr,"%ld",timeFinish);
-
+    fprintf(stderr,"Amount of time to perform operation: %ld\n",timeFinish);
     return 0;
 }
 
@@ -146,8 +154,8 @@ void matrix_add(int curBlock[rows][cols],int block_size,int scalar)
     int i = 0;
     int j = 0;
 
-    for(i = 0; i < block_size; i++){
-        for(j = 0; j < block_size; j++){
+    for(i = 0; i < block_size ; i++){
+        for(j = 0; j < block_size ; j++){
             curBlock[i][j] = curBlock[i][j] + scalar;
         }
     }
