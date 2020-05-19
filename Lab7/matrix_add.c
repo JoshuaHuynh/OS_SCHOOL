@@ -117,7 +117,7 @@ int main(int argc, char* const argv[])
 
             for(i = 0; i < block_size; i++){
                 for(j = 0; j < block_size; j++){
-                    sprintf(numPrint,"%d ",curBlock[i][i]);
+                    sprintf(numPrint,"%d ",curBlock[i][j]);
                     aiow.aio_buf = numPrint;
                     n = strlen(numPrint);
                     aiow.aio_nbytes = (int)n;
