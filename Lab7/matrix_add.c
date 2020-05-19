@@ -31,6 +31,7 @@ int main(int argc, char* const argv[])
     int size1 = 0;
     int scalar = (rand() % 100) + oneOrZero; //Scalar can be any number in the range -100 to 100.
     int x,y,i,j;
+    int curSize = 0;
     size_t n;
     char current[200];
     char one[5];
@@ -115,10 +116,13 @@ int main(int argc, char* const argv[])
                     aiow.aio_nbytes = (int)n;
                     aio_write(&aiow);
                     aio_return(&aiow);
+                    curSize++;
 
                     printf(" ");
-                    if(j == (block_size - 1))
+                    if(curSize == size1){
+                        curSize = 0;
                         printf("\n");
+                    }
                 }
             }
 
