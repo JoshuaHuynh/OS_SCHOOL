@@ -36,7 +36,10 @@ int main(int argc, char* const argv[])
             else if(theSign == 1)
                 randNum = randNum * -1;
 
-            printf("%d ",randNum);
+            printf("%d",randNum);
+
+            if(y < size1 - 1)
+                printf(" ");
 
             if(y == size1 -1)
                 printf("\n");

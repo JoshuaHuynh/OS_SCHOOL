@@ -28,12 +28,12 @@ all: $(EXECUTABLES) $(EXECUTABLES2)
 # On the following lines (which _must_ start with a tab), are the commands I need to type -- 
 # each time my source file is modified.
 $(EXECUTABLES): $(SRC)
-	$(CC) $(CFLAGS) -c $(SRC) -Wall -Wextra
-	$(CC) $(CFLAGS) -o $@ $(OBJ) -Wall -Wextra
+	$(CC) $(CFLAGS) -c $(SRC) -lrt -Wall -Wextra
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -lrt -Wall -Wextra
 
 $(EXECUTABLES2): $(SRC2)
-	$(CC) $(CFLAGS) -c $(SRC2) -Wall -Wextra
-	$(CC) $(CFLAGS) -o $@ $(OBJ2) -Wall -Wextra
+	$(CC) $(CFLAGS) -c $(SRC2) -lrt -Wall -Wextra
+	$(CC) $(CFLAGS) -o $@ $(OBJ2) -lrt -Wall -Wextra
 
 # By convention, I always have a target called
 # "clean" that I used to define all temporary
