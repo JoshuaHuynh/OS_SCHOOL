@@ -1,5 +1,5 @@
 //Name: Joshua Huynh
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -10,23 +10,8 @@
 #include <aio.h>
 #include <ctype.h>
 #include <string.h>
-*/
-#include <stdio.h>
-#include <stdlib.h> //For strtol()
-#include <time.h> //For getrlimit()
-#include <sys/types.h>
-#include <unistd.h> //For setsid(), fork(), chdir(), and dup()
-#include <sys/time.h>
-#include <string.h>
-#include <stdint.h> //For uint32_t
-#include <ctype.h>
-#include <sys/stat.h> //For umask()
-#include <sys/resource.h> //For getrlimit()
-#include <signal.h> // For signal()
-#include <string.h>
-#include <sys/wait.h>
 #include <fcntl.h>
-#include <aio.h>
+
 
 struct aiocb aio;
 struct aiocb aiow;
@@ -124,7 +109,8 @@ int main(int argc, char* const argv[])
 
             for(i = 0; i < block_size; i++){
                 for(j = 0; j < block_size; j++){
-                    itoa(curBlock[i][j],numPrint,10);
+                    //itoa(curBlock[i][j],numPrint,10);
+                    sprintf(numPrint,"%d",curBlock[i][i]);
                     n = strlen(numPrint);
                     aiow.aio_nbytes = (int)n;
                     aio_write(&aiow);
