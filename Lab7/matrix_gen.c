@@ -14,7 +14,7 @@ int main(int argc, char* const argv[])
 {
     (void)argc;
     srand(time(NULL));
-    int theSign = rand() % 2;
+    int theSign = rand() % 2; //This variable is used to determine whether the integer is negative or not.
     int oneOrZero = rand() % 2;
     int size1 = 0;
     int randNum = 0;
@@ -28,7 +28,7 @@ int main(int argc, char* const argv[])
     size1 = (int)num;
     int i = 0;
     int y = 0;
-    for(i = 0; i < size1; i++){
+    for(i = 0; i < size1; i++){ //These two for-loops will generate a matrix in a file.
         for(y = 0; y < size1; y++){
             randNum = (rand() % 100) + oneOrZero;
             theSign = rand() % 2;

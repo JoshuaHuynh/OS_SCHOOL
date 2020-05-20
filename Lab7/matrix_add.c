@@ -57,6 +57,12 @@ int main(int argc, char* const argv[])
     long num2 = strtol(argv[2],NULL,10); //Changes argv[2] from string to number.
     blocks = (int)num2;
 
+    if((size1 % blocks) != 0){ //Checking the input values to ensure that everything divides evenly.
+        fprintf(stderr,"Does not divide evenly. Exiting program.\n");
+        return 0;
+    }
+
+
     block_size = size1/blocks;
 
     rows = block_size;
