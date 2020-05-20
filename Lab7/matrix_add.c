@@ -134,7 +134,7 @@ int main(int argc, char* const argv[])
                     }
                     aiow.aio_buf = numPrint;
                     n = strlen(numPrint);
-                    aiow.aio_nbytes = n + ((size_t)block_size * (size_t)block_size);
+                    aiow.aio_nbytes = n;
 
                     offW = offW + (off_t)strlen(numPrint);
                     aio_write(&aiow);
