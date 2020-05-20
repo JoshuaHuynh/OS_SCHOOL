@@ -43,6 +43,7 @@ int main(int argc, char* const argv[])
     int blockRow = 0, blockCol = 0;
     char numPrint[200] = "";
     long temp;
+    off_t offW = 0;
 
 
     if (theSign == 0)
@@ -117,22 +118,28 @@ int main(int argc, char* const argv[])
 
             for(i = 0; i < block_size; i++){
                 for(j = 0; j < block_size; j++){
-                    sprintf(numPrint,"%d ",curBlock[i][j]);
+                    curSize++;
+                    if(curSize == size1){
+                        curSize = 0;
+                        sprintf(numPrint,"%d\n",curBlock[i][j]);
+                    }
+                    else{
+                        sprintf(numPrint,"%d ",curBlock[i][j]);
+                    }
                     aiow.aio_buf = numPrint;
                     n = strlen(numPrint);
-                    aiow.aio_nbytes = (int)n;
+                    aiow.aio_nbytes = n + ((size_t)block_size * (size_t)block_size);
+
+                    offW = offW + (off_t)strlen(numPrint);
                     aio_write(&aiow);
                     aio_return(&aiow);
                     while(aio_error(&aiow) == EINPROGRESS){
 
                     }
-                    curSize++;
 
 
-                    if(curSize == size1){
-                        curSize = 0;
-                        printf("\n");
-                    }
+                    aiow.aio_offset = offW;
+
                 }
             }
 
